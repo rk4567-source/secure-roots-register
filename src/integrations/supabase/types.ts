@@ -14,16 +14,235 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      birth_registrations: {
+        Row: {
+          address_line1: string
+          address_line2: string | null
+          child_gender: string
+          child_name: string
+          city: string
+          created_at: string | null
+          date_of_birth: string
+          father_aadhaar: string | null
+          father_name: string
+          id: string
+          mother_aadhaar: string | null
+          mother_name: string
+          pincode: string
+          place_of_birth: string
+          registration_number: string | null
+          remarks: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          state: string
+          status: string | null
+          submitted_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address_line1: string
+          address_line2?: string | null
+          child_gender: string
+          child_name: string
+          city: string
+          created_at?: string | null
+          date_of_birth: string
+          father_aadhaar?: string | null
+          father_name: string
+          id?: string
+          mother_aadhaar?: string | null
+          mother_name: string
+          pincode: string
+          place_of_birth: string
+          registration_number?: string | null
+          remarks?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state: string
+          status?: string | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address_line1?: string
+          address_line2?: string | null
+          child_gender?: string
+          child_name?: string
+          city?: string
+          created_at?: string | null
+          date_of_birth?: string
+          father_aadhaar?: string | null
+          father_name?: string
+          id?: string
+          mother_aadhaar?: string | null
+          mother_name?: string
+          pincode?: string
+          place_of_birth?: string
+          registration_number?: string | null
+          remarks?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state?: string
+          status?: string | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      death_registrations: {
+        Row: {
+          address_line1: string
+          address_line2: string | null
+          cause_of_death: string
+          city: string
+          created_at: string | null
+          date_of_birth: string
+          date_of_death: string
+          deceased_gender: string
+          deceased_name: string
+          id: string
+          informant_aadhaar: string | null
+          informant_name: string
+          informant_phone: string
+          informant_relation: string
+          pincode: string
+          place_of_death: string
+          registration_number: string | null
+          remarks: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          state: string
+          status: string | null
+          submitted_at: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          address_line1: string
+          address_line2?: string | null
+          cause_of_death: string
+          city: string
+          created_at?: string | null
+          date_of_birth: string
+          date_of_death: string
+          deceased_gender: string
+          deceased_name: string
+          id?: string
+          informant_aadhaar?: string | null
+          informant_name: string
+          informant_phone: string
+          informant_relation: string
+          pincode: string
+          place_of_death: string
+          registration_number?: string | null
+          remarks?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state: string
+          status?: string | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          address_line1?: string
+          address_line2?: string | null
+          cause_of_death?: string
+          city?: string
+          created_at?: string | null
+          date_of_birth?: string
+          date_of_death?: string
+          deceased_gender?: string
+          deceased_name?: string
+          id?: string
+          informant_aadhaar?: string | null
+          informant_name?: string
+          informant_phone?: string
+          informant_relation?: string
+          pincode?: string
+          place_of_death?: string
+          registration_number?: string | null
+          remarks?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          state?: string
+          status?: string | null
+          submitted_at?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          address: string | null
+          created_at: string | null
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          created_at?: string | null
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string | null
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_registration_number: {
+        Args: { prefix: string }
+        Returns: string
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +369,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
